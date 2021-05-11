@@ -1,0 +1,37 @@
+{
+  "name": "tmp1",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "nodemon server.js"
+  },
+  "dependencies": {
+    "liburno_bklib": "^3.0.15"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.2",
+    "@vue/compiler-sfc": "^3.0.5",
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.14",
+    "tailwindcss": "^2.1.2",
+    "vite": "^2.2.3",
+    "vue": "^3.0.5"
+  },
+  "config": {
+    "login": true,
+    "isguest": true,
+    "register": true,
+    "bkdoor": true,
+    "client": {
+      "imguser": "tito",
+      "imggruppo": "@my"
+    },
+    "datafolder": "data/_files",
+    "port": 3050,
+    "sito": "http://localhost:3000",
+    "tk": "577b7c29a8b9e755f8a60b3c4756d7c9a8f7e4d4ccfa912d9d98805d4cd2d55d99520a34f446b1544d0bbb51b8e13a50202cd017cb81e7a4f7ac8e9cfa6c658f",
+    "tr": "a798d0acc310fb6b0f631ccce90ed8ab95b6ffafc588a049a4d3bf37557a9053166a7524b516e3d618e244a9f5d3d1437f22020bf7425a5b7c2b70cbb6a85059",
+    "expire_tk": "1d"
+  }
+}
