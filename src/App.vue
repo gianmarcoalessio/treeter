@@ -1,5 +1,5 @@
 <template>
-  <h1></h1>
+  <h1 class="text-lightgreen bg-dark">Giammi è il ragazzo più del mocndo e io sono dislessico</h1>
 </template>
 
 <script>
