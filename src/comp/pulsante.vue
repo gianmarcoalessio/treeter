@@ -8,18 +8,6 @@
 
 <script>
 export default {
-    //variabili locali al componenti le posso usare in export default con il this come i props
-    data(){
-        return{}
-    },
-    //funzione che viene chiamata quando il componente viene chiamato per la prima volta, serve per impostare dei valori di default 
-    created(){
-        return{}
-    },
-    //funzione che viene chiamata prima della distruzione del componente
-    beforeDestroy(){
-        return{}
-    },
     methods: {
         emit(id){
             this.$emit("premi",{id,title: this.title, callback:()=>{

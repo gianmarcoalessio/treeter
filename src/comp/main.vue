@@ -4,9 +4,8 @@
         <div class="lg:w-1/5 border-r border-lighter px-2 lg:px-6 py-2 flex flex-col justify-between">
             <jgNavTop />
             <jgNavBottom> 
-                <h1 class=p-2>ciao</h1>
-                <template v-slot:utente>altri dati utente</template>    
-                <template v-slot:bottone> aggiungi nuovo utente </template>
+                <!-- <template v-slot:utente>altri dati utente</template>    
+                <template v-slot:bottone> aggiungi nuovo utente </template> -->
             </jgNavBottom>   
         </div>
         <!-- Treets -->

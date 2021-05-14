@@ -3,7 +3,6 @@
 </template>
 
 <script>
-
 import jgMain from  "@comp/main.vue"
 export default {
     components: {
@@ -15,6 +14,3 @@ export default {
     }
 };
 </script>
-
-<style>
-</style>

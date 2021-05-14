@@ -1,22 +1,86 @@
 <template>
-  
+  <div
+    v-for="(follow, i) in following"
+    :key="i"
+    class="flex flex-col-reverse w-full p-4 border-b hover:bg-lighter"
+  >
+    <jgTreet
+      :src="follow.src"
+      :name="follow.name"
+      :handle="follow.handle"
+      :time="follow.time"
+      :tweet="follow.tweet"
+      :comments="follow.comments"
+      :retweets="follow.retweets"
+      :like="follow.like"
+    />
+  </div>
 </template>
 
 <script>
+import jgTreet from "@comp/treet.vue";
 export default {
-data(){
+  data() {
     return {
-    following: [
-        {src: 'elon.jpg', name: 'Elon Musk', handle: '@teslaBoy', time: '20 min', tweet: 'Should I just quarantine on mars??', comments: '1,000', retweets: '550', like: '1,000,003'},
-        {src: 'kevin.jpg', name: 'Kevin Hart', handle: '@miniRock', time: '55 min', tweet: 'Should me and the rock do another sub-par movie together????', comments: '2,030', retweets: '50', like: '20,003'},
-        {src: 'elon.jpg', name: 'Elon Musk', handle: '@teslaBoy', time: '1.4 hr', tweet: 'Haha just made a flame thrower. Shld I sell them?', comments: '100,000', retweets: '1,000,002', like: '5,000,003'},
-        {src: 'elon.jpg', name: 'Elon Musk', handle: '@teslaBoy', time: '1.4 hr', tweet: 'Just did something crazyyyyyyy', comments: '100,500', retweets: '1,000,032', like: '5,000,103'}
+      following: [
+        {
+          src: "elon.jpg",
+          name: "Agostino Alessio",
+          handle: "@liburno",
+          time: "20 min",
+          tweet: "Ottimo lavoro ragazzi <3<3",
+          comments: "1,000",
+          retweets: "550",
+          like: "1,000,003",
+        },
+        {
+          src: "kevin.jpg",
+          name: "Turing",
+          handle: "@cipollino",
+          time: "55 min",
+          tweet: "Bau",
+          comments: "2,030",
+          retweets: "50",
+          like: "20,003",
+        },
+        {
+          src: "kevin.jpg",
+          name: "Lanie Alessio Restauro",
+          handle: "@lanievento",
+          time: "57 min",
+          tweet: "Volete qualcosa da mangiare",
+          comments: "7,030",
+          retweets: "40",
+          like: "33,000",
+        },
+        {
+          src: "elon.jpg",
+          name: "dessa",
+          handle: "@teslaBoy1",
+          time: "1.4 hr",
+          tweet: "Haha ",
+          comments: "100,000",
+          retweets: "1,000,002",
+          like: "5,000,003",
+        },
+        {
+          src: "elon.jpg",
+          name: "giammi",
+          handle: "@teslaBoy2",
+          time: "1.4 hr",
+          tweet: "Grazie :)",
+          comments: "100,500",
+          retweets: "1,000,032",
+          like: "5,000,103",
+        },
       ],
-    }
-},
-}
+    };
+  },
+  components: {
+    jgTreet,
+  },
+};
 </script>
 
 <style>
-
 </style>
