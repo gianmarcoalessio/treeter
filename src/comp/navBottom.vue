@@ -20,7 +20,7 @@
     >
       <button
         @click="dropdown = false"
-        class="p-3 flex items-center w-full hover:bg-lightest p-2 focus:outline-none"
+        class=" flex items-center w-full hover:bg-lightest p-2 focus:outline-none"
       >
         <i
           class="fas fa-user w-8 h-8 pt-2 rounded-full border border-lighter"

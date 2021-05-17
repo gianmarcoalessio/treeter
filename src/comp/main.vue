@@ -10,6 +10,7 @@
         </div>
         <!-- Treets -->
         <div class="w-full md:w-1/2 h-full overflow-y-scroll">
+            <jgTritta />
             <jgTreets />
         </div>
     </div>
@@ -20,6 +21,7 @@
 import jgNavTop from "@comp/navTop.vue"
 import jgNavBottom from "@comp/navBottom.vue"
 import jgTreets from "@comp/treets.vue"
+import jgTritta from "@comp/tritta.vue"
 
 export default {
 
@@ -27,6 +29,7 @@ export default {
         jgNavTop,
         jgNavBottom,
         jgTreets,
+        jgTritta,
     },
 
 }
