@@ -10,9 +10,7 @@
 export default {
     methods: {
         emit(id){
-            this.$emit("premi",{id,title: this.title, callback:()=>{
-                console.log("callback")
-            }})
+            this.$emit("premi",{id})
         }
     },
     //i parametri che possiamo usare quando usiamo l'oggetto 

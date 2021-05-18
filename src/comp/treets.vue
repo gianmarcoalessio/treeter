@@ -1,4 +1,21 @@
 <template>
+  <!-- myTreets -->
+  <div
+    v-for="(treet, i) in treets"
+    :key="i"
+    class="flex flex-col-reverse w-full p-4 border-b hover:bg-lighter"
+  >
+    <jgTreet
+     :src="myUser.src"
+      :name="myUser.name"
+      :handle="myUser.handle"
+      :time="myUser.time"
+      :tweet="treet.content"
+      :comments="myUser.comments"
+      :retweets="myUser.retweets"
+      :like="myUser.like" />
+    </div>
+    <!-- following -->
   <div
     v-for="(follow, i) in following"
     :key="i"
@@ -14,6 +31,7 @@
       :retweets="follow.retweets"
       :like="follow.like"
     />
+
   </div>
 </template>
 
@@ -22,6 +40,13 @@ import jgTreet from "@comp/treet.vue";
 export default {
   data() {
     return {
+      myUser:{src: "",
+          name: "User",
+          handle: "@username",
+          time: "1s",
+          comments: "0",
+          retweets: "0",
+          like: "0",},
       following: [
         {
           src: "elon.jpg",
@@ -75,6 +100,9 @@ export default {
         },
       ],
     };
+  },
+  props:{
+    treets:Array
   },
   components: {
     jgTreet,

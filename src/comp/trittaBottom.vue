@@ -1,28 +1,59 @@
 <template>
-  <div v-for="(icon,k) in tailwind" :key="k" class="flex items-center">
-      <i :class="icon"></i>
+  <div class="px-5 py-3 border-b-8 border-lighter flex">
+    <div>
+      <!-- NOTA: a cosa serve il flex-none -->
+      <i
+        class="fas fa-user w-12 h-12 pt-2 pl-3.5 text-2xl rounded-full border border-lighter"
+      ></i>
+    </div>
+    <form v-on:submit.prevent="addNewTweet" class="w-full px-4 relative">
+      <textarea
+        v-model="tweet.content"
+        placeholder="What's up?"
+        class="mt-3 pb-3 w-full focus:outline-none"
+      />
+      <div class="flex items-center">
+        <jgTrittaIcons :icons="icons" />
+      </div>
+      <button
+        class="h-10 px-4 text-white font-semibold bg-green hover:bg-darkgreen focus:outline-none rounded-full absolute bottom-0 right-0"
+      >
+        Tweet
+      </button>
+    </form>
   </div>
 </template>
 
 <script>
+import jgTrittaIcons from "@comp/trittaIcons.vue";
 export default {
-    props:{
-        icons: {default:[], type:Array},
+  components: {
+    jgTrittaIcons,
+  },
+  data() {
+    return {
+      tweets: [{ content: "It is so nice outside!" }],
+      tweet: { content: "" },
+      icons: [
+        "far fa-image",
+        "fas fa-film",
+        "far fa-chart-bar",
+        "far fa-smile",
+      ],
+    };
+  },
+
+  methods: {
+    addNewTweet() {
+      let newTweet = {
+        content: this.tweet.content,
+      };
+      this.tweets.push(newTweet);
+      this.$emit("treets",this.tweets)
     },
-    computed: {
-        tailwind(){
-            let tmp=[];
-            for (var i of this.icons) {
-                tmp.push("text-lg text-darkgreen mr-4 "+i)
-            }
-            return tmp; 
-        }
-
-    }
-
-}
+  },
+};
 </script>
 
 <style>
-
 </style>

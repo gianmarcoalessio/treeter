@@ -10,9 +10,15 @@
         </div>
         <!-- Treets -->
         <div class="w-full md:w-1/2 h-full overflow-y-scroll">
-            <jgTritta />
-            <jgTreets />
+            <jgTritta @treets="tritta($event)" />
+            <jgTreets :treets="treets" />
         </div>
+        <!-- Trending -->    
+        <div class="md:block hidden w-1/3 h-full border-l border-lighter py-2 px-6 overflow-y-scroll relative">
+            <jgTrending />
+        </div>
+
+
     </div>
 </template>
 
@@ -22,15 +28,24 @@ import jgNavTop from "@comp/navTop.vue"
 import jgNavBottom from "@comp/navBottom.vue"
 import jgTreets from "@comp/treets.vue"
 import jgTritta from "@comp/tritta.vue"
+import jgTrending from "@comp/trending.vue"
 
 export default {
-
+    data(){
+        return {treets:[]}
+    },
     components:{
         jgNavTop,
         jgNavBottom,
         jgTreets,
         jgTritta,
+        jgTrending,
     },
+    methods:{
+        tritta(x){
+            this.treets=x;
+        }
+    }
 
 }
 </script>
