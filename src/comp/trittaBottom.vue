@@ -1,7 +1,6 @@
 <template>
   <div class="px-5 py-3 border-b-8 border-lighter flex">
     <div>
-      <!-- NOTA: a cosa serve il flex-none -->
       <i
         class="fas fa-user w-12 h-12 pt-2 pl-3.5 text-2xl rounded-full border border-lighter"
       ></i>

@@ -5,7 +5,8 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
     alias: {
       '@css': '/css',
-      '@comp': '/src/comp'
+      '@comp': '/src/comp',
+      '@eng': '/src/eng',
     },
   plugins: [vue()]
 })
