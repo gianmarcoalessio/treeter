@@ -8,20 +8,20 @@ const { Reset, Bold, Reverse, Red, Green, Yellow, Blue, Magenta, Cyan, White } =
 
 var pjson = require('./package.json');
 if (!pjson.config) throw new Error("missing config in package.json")
-if (!pjson.config.client) pjson.config.client={};
+if (!pjson.config.client) pjson.config.client = {};
 if (!pjson.config.tk) {
-  fl=true;
-  pjson.config.tk=require('crypto').randomBytes(64).toString('hex');
-  pjson.config.tr=require('crypto').randomBytes(64).toString('hex');
-  pjson.config.expire_tk="1d"
-  fs.writeFileSync("package.json",JSON.stringify(pjson,null,2));
+  fl = true;
+  pjson.config.tk = require('crypto').randomBytes(64).toString('hex');
+  pjson.config.tr = require('crypto').randomBytes(64).toString('hex');
+  pjson.config.expire_tk = "1d"
+  fs.writeFileSync("package.json", JSON.stringify(pjson, null, 2));
 }
 
-var config=pjson.config 
-var APPNAME=pjson.description?pjson.description:pjson.name;
+var config = pjson.config
+var APPNAME = pjson.description ? pjson.description : pjson.name;
 
-const port=process.env.PORT || config.port || 3000;
-config.client.port=port;
+const port = process.env.PORT || config.port || 3000;
+config.client.port = port;
 
 console.log(`\n\nRestarting ${Cyan}${Bold} ${APPNAME.toUpperCase()} ${Reset}`)
 
@@ -35,7 +35,7 @@ var addfile = (file, pars) => {
   app.use('/' + file, pars);
 }
 //addfile('blog',require('./srcbk/blog'))
-addfile('servizio',require('./srcbk/servizio.js'))
+addfile('servizio', require('./srcbk/servizio.js'))
 
 server.listen(port, () => {
   console.log(`${Bold}${Green}Start server at: ${White}${port}${Reset}`);

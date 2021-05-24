@@ -21,8 +21,9 @@ var treets = []
 //tabella users
 for (var u of users) {
     var n = u.nome.split(' ')
-    u.nome = n[0]
-    u.cognome = n[1]
+    u.name = n[0]
+    u.surname = n[1]
+    u.age = u.dtnascita
     u.id = "u" + u.rowid
     u.username = "@" + n[0].toLowerCase() + n[1].toLowerCase()
     u.sex = randomvec(sex)
@@ -109,3 +110,23 @@ CREATE TABLE if not exists users (
 }
 
 
+db.begin()
+var df = db.prepare("insert or replace into followers (user, following) values (?,?) ")
+var du = db.prepare("insert or replace into users (id, username, name, surname, age, email, sex, picture, special) values (?,?,?,?,?,?,?,?,?) ")
+for (var u of users) {
+    du.run(u.id, u.username, u.name, u.surname, u.age, u.email, u.sex, u.picture, u.special)
+    for (var f of u.following) {
+        df.run(u.id, f)
+    }
+}
+
+var dl = db.prepare("insert or replace into likes (user, liked) values (?,?) ")
+var dt = db.prepare("insert or replace into treets(id, author, isretreet, iscomment, content) values(?,?,?,?,?)")
+for (var tr of treets) {
+    dt.run(tr.id, tr.author, tr.isRetreet, tr.isComment, tr.content)
+    for (var l of tr.liked) {
+        dl.run(l, tr.id)
+    }
+}
+db.commit()
+db.chiudi()

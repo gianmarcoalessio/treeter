@@ -1,0 +1,29 @@
+###
+POST http://localhost:8000/servo1/post1
+content-type: application/json
+
+{
+    "dati":"prova 1",
+    "_UID": "4d458c9a9c3d4f6534380c9e73988f4b" 
+}
+
+###
+
+POST http://localhost:3050/servizio/jgLog
+content-type: application/json
+
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
