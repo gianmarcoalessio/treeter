@@ -1,5 +1,5 @@
-class Bus{
-    constructor(){
+class Bus {
+    constructor() {
         this.data = {};
     }
 
@@ -7,7 +7,7 @@ class Bus{
         this.data[key] = this.data[key] || [];
         this.data[key].push(fn);
     }
- 
+
 
     off(key, fn) {
         if (this.data[key]) {
@@ -19,20 +19,17 @@ class Bus{
             };
         }
     }
-    $on(key,fn) { this.on(key,fn) }
-    $off(key,fn) { this.off(key,fn) }
-
     emit(key, pars) {
         if (this.data[key]) {
             for (var fn of this.data[key]) {
-                fn([pars]);
+                fn(pars);
             };
         }
     }
-    $on(key,fn) { this.on(key,fn) }
-    $off(key,fn) { this.off(key,fn) }
-    $emit(key,pars) { this.emit(key,pars) }
+    $on(key, fn) { this.on(key, fn) }
+    $off(key, fn) { this.off(key, fn) }
+    $emit(key, pars) { this.emit(key, pars) }
 
 }
 
-export default new Bus();
+export var bus = new Bus();

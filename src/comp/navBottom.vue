@@ -20,31 +20,35 @@
     >
       <button
         @click="dropdown = false"
-        class=" flex items-center w-full hover:bg-lightest p-2 focus:outline-none"
+        class="flex items-center w-full hover:bg-lightest p-2 focus:outline-none"
       >
         <i
           class="fas fa-user w-8 h-8 pt-2 rounded-full border border-lighter"
         ></i>
         <!-- <img src="profile.png" class="w-10 h-10 rounded-full border border-lighter" /> -->
         <div class="ml-4">
-          <p class="text-sm font-bold leading-tight">Your Name</p>
-          <p class="text-sm leading-tight">@username</p>
+          <p class="text-sm font-bold leading-tight">
+            {{ logged.name + logged.surname || "Your name" }}
+          </p>
+          <p class="text-sm leading-tight">
+            {{ logged.username || "@username" }}
+          </p>
 
           <slot name="utente"> </slot>
         </div>
         <i class="fas fa-check ml-auto text-green"></i>
       </button>
       <button
-        @click="dropdown = false"
+        @click="login()"
         class="w-full text-left hover:bg-lightest border-t border-lighter p-3 test-sm focus:outline-none"
       >
         <slot name="bottone"> Add an existing account </slot>
       </button>
       <button
-        @click="dropdown = false"
+        @click="logout()"
         class="w-full text-left hover:bg-lightest border-t border-lighter p-3 test-sm focus:outline-none"
       >
-        Log out @SaaSyEth
+        Log out {{ logged.username }}
       </button>
       <slot />
     </div>
@@ -52,9 +56,23 @@
 </template>
 
 <script>
+import { bus } from "@eng/bus";
+import { post } from "@eng/post";
 export default {
+  methods: {
+    async login() {
+      this.logged = await post.post("servizio/jgLog");
+      this.logged.name = this.logged.name + " "; //per aggiungere lo spazio tra nome e cognome senza rompere il codice in riga 31
+      bus.emit("logged", this.logged.id);
+      //console.log(this.logged.id);
+    },
+    logout() {
+      this.logged = {};
+    },
+  },
   data() {
     return {
+      logged: {},
       dropdown: false,
     };
   },

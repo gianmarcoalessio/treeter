@@ -1,9 +1,9 @@
-import { bus } from "@eng/bus";
 import { getStorage, setStorage } from "@eng/utils";
+import { bus }  from "@eng/bus";
+
 class Post {
     constructor() {
-        const port= process.env.NODE_PORT || 3000;
-        this.baseurl = process.env.NODE_ENV === 'development' ? `http://localhost:${port}/`:'/';
+        this.baseurl = import.meta.env.MODE=="development"?(import.meta.env.VITE_BASEURL || "http://localhost:3000/") : "http://localhost:3000/"
         this.creds = getStorage("creds")
         if (!this.creds) {
             this.creds={ token:'guest'};
@@ -199,8 +199,8 @@ class Post {
         if (this.iswarning) {
             bus.$emit('warning', data)
         }
-        reject(data);
+        if (reject) reject(data);
     }
 }
-export default new Post();
+export var post= new Post();
 
