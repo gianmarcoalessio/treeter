@@ -9,7 +9,7 @@ content-type: application/json
 
 ###
 
-POST http://localhost:3050/servizio/jgLog
+POST http://localhost:3000/servizio/jgLog
 content-type: application/json
 
 {

@@ -4,10 +4,14 @@ const fs = require("fs")
 var { database } = require("liburno_lib")
 var db1 = database.db("data/comuni.db")
 
-
 function randomint(n) {
     return Math.floor(Math.random() * n) //valore casuale da 0 a n-1
 }
+
+function randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toLocaleString();
+}
+
 function randomvec(v) {
     var i = randomint(v.length)
     return v[i] //valore casuale da 0 a n-1
@@ -62,6 +66,7 @@ for (var i = 1; i < 1001; i++) {
         tmp.isComment = ""
     }
     tmp.content = lorem.generateWords(randomInt(17))
+    tmp.date = randomDate(new Date(2012, 11, 21), new Date())
     treets.push(JSON.parse(JSON.stringify(tmp)))
 }
 for (tr of treets) {
@@ -75,8 +80,10 @@ for (tr of treets) {
 
 var file = "data/treeter.db"
 var esiste = fs.existsSync(file)
+console.log(esiste)
 var db = database.db(file)
 
+//non funziona!!!!!!
 if (!esiste) {
     db.prepare(`
     -- creazione
@@ -91,6 +98,7 @@ CREATE TABLE if not exists likes (
 CREATE TABLE if not exists treets (
    id NVARCHAR COLLATE NOCASE DEFAULT '',
    author NVARCHAR COLLATE NOCASE DEFAULT '',
+   date NVARCHAR COLLATE NOCASE DEFAULT '',
    isretreet NVARCHAR COLLATE NOCASE DEFAULT '',
    iscomment NVARCHAR COLLATE NOCASE DEFAULT '',
    content NVARCHAR COLLATE NOCASE DEFAULT ''
@@ -121,9 +129,9 @@ for (var u of users) {
 }
 
 var dl = db.prepare("insert or replace into likes (user, liked) values (?,?) ")
-var dt = db.prepare("insert or replace into treets(id, author, isretreet, iscomment, content) values(?,?,?,?,?)")
+var dt = db.prepare("insert or replace into treets(id, author, isretreet, date, iscomment, content) values(?,?,?,?,?,?)")
 for (var tr of treets) {
-    dt.run(tr.id, tr.author, tr.isRetreet, tr.isComment, tr.content)
+    dt.run(tr.id, tr.author, tr.isRetreet, tr.date, tr.isComment, tr.content)
     for (var l of tr.liked) {
         dl.run(l, tr.id)
     }

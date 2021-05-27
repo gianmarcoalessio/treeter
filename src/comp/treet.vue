@@ -10,7 +10,7 @@
     <div class="w-full">
       <div class="flex items-center w-full">
         <p class="font-semibold">{{ name }}</p>
-        <p class="text-sm text-dark ml-2">{{ handle }}</p>
+        <p class="text-sm text-dark ml-2">{{ username }}</p>
         <p class="text-sm text-dark ml-2">{{ time }}</p>
         <i class="fas fa-angle-down text-dark ml-auto"></i>
       </div>
@@ -19,13 +19,13 @@
       </p>
 
       <div class="flex items-center w-full justify-between">
-      <div
-        v-for="(bot, i) in bottom"
-        :key="i"
-        class="flex items-center text-sm text-dark"
-      >
-        <jgTreetIcon :input="bot.icon" :title="bot.title" />
-      </div>
+        <div
+          v-for="(bot, i) in bottom"
+          :key="i"
+          class="flex items-center text-sm text-dark"
+        >
+          <jgTreetIcon :input="bot.icon" :title="bot.title" />
+        </div>
       </div>
     </div>
   </div>
@@ -40,17 +40,17 @@ export default {
   data() {
     return {
       bottom: [
-        { icon: "far fa-comment", title: this.comments},
+        { icon: "far fa-comment", title: this.comments },
         { icon: "fas fa-retweet", title: this.retweets },
-        { icon: "fas fa-heart", title: this.like},
-        { icon: "fas fa-share-square", title: ""},
+        { icon: "fas fa-heart", title: this.like },
+        { icon: "fas fa-share-square", title: "" },
       ],
     };
   },
   props: {
     src: String,
     name: String,
-    handle: String,
+    username: String,
     time: String,
     tweet: String,
     comments: String,

@@ -61,13 +61,17 @@ import { post } from "@eng/post";
 export default {
   methods: {
     async login() {
-      this.logged = await post.post("servizio/jgLog");
+      this.logged = await post.post("servizio/jgGetQuery", {
+        query:
+          "select id,username,name,surname,age,email,sex,picture,special from users order by random()",
+      });
       this.logged.name = this.logged.name + " "; //per aggiungere lo spazio tra nome e cognome senza rompere il codice in riga 31
       bus.emit("logged", this.logged.id);
       //console.log(this.logged.id);
     },
     logout() {
       this.logged = {};
+      bus.emit("logout");
     },
   },
   data() {

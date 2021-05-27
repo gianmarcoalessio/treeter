@@ -42,12 +42,12 @@
       :key="k"
       class="w-full flex hover:bg-lighter p-3 border-t border-lighter"
     >
-    <i
+      <i
         class="hidden lg:block fas fa-user w-12 h-12 p-3 pt-2 text-2xl rounded-full border border-lighter"
       ></i>
       <div class="text-left lg:text-center lg:ml-4">
-        <p class=" text-sm font-bold leading-tight">{{ friend.name }}</p>
-        <p class=" text-sm leading-tight">{{ friend.handle }}</p>
+        <p class="text-sm font-bold leading-tight">{{ friend.name }}</p>
+        <p class="text-sm leading-tight">{{ friend.username }}</p>
       </div>
       <button
         class="ml-auto text-sm text-darkgreen py-1 px-4 rounded-full border-2 border-darkgreen"
@@ -79,15 +79,15 @@ export default {
         { top: "Trending", title: "When Beyonce", bottom: "25.4k tweets" },
       ],
       friends: [
-        { src: "elon.jpg", name: "Elon Musk", handle: "@teslaBoy" },
-        { src: "monk.jpg", name: "Adrian Monk", handle: "@detective" },
-        { src: "kevin.jpg", name: "Kevin Hart", handle: "@miniRock" },
+        { src: "elon.jpg", name: "Elon Musk", username: "@teslaBoy" },
+        { src: "monk.jpg", name: "Adrian Monk", username: "@detective" },
+        { src: "kevin.jpg", name: "Kevin Hart", username: "@miniRock" },
       ],
       following: [
         {
           src: "elon.jpg",
           name: "Elon Musk",
-          handle: "@teslaBoy",
+          username: "@teslaBoy",
           time: "20 min",
           tweet: "Should I just quarantine on mars??",
           comments: "1,000",
@@ -97,7 +97,7 @@ export default {
         {
           src: "kevin.jpg",
           name: "Kevin Hart",
-          handle: "@miniRock",
+          username: "@miniRock",
           time: "55 min",
           tweet: "Should me and the rock do another sub-par movie together????",
           comments: "2,030",
@@ -107,7 +107,7 @@ export default {
         {
           src: "elon.jpg",
           name: "Elon Musk",
-          handle: "@teslaBoy",
+          username: "@teslaBoy",
           time: "1.4 hr",
           tweet: "Haha just made a flame thrower. Shld I sell them?",
           comments: "100,000",
@@ -117,7 +117,7 @@ export default {
         {
           src: "elon.jpg",
           name: "Elon Musk",
-          handle: "@teslaBoy",
+          username: "@teslaBoy",
           time: "1.4 hr",
           tweet: "Just did something crazyyyyyyy",
           comments: "100,500",

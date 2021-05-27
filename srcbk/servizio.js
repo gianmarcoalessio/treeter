@@ -31,10 +31,30 @@ router
         } catch (e) { res.send(new Response(req, undefined, e.message)); }
     })
 
-    .post('/jgLog', (req, res) => {
+    // .post('/jgLog', (req, res) => {
+    //     try {
+    //         var db = dbTreeter();
+    //         var logged = db.prepare("select id,username,name,surname,age,email,sex,picture,special from users order by random()").get()
+    //         db.chiudi();
+    //         res.send(new Response(req, logged))
+    //     } catch (e) { res.send(new Response(req, logged, e.message)); }
+    // })
+
+    .post('/jgGetQuery', (req, res) => {
         try {
             var db = dbTreeter();
-            var logged = db.prepare("select id,username,name,surname,age,email,sex,picture,special from users order by random()").get()
+            var { query } = req.body
+            var logged = db.prepare(query).get()
+            db.chiudi();
+            res.send(new Response(req, logged))
+        } catch (e) { res.send(new Response(req, logged, e.message)); }
+    })
+
+    .post('/jgAllQuery', (req, res) => {
+        try {
+            var db = dbTreeter();
+            var { query } = req.body
+            var logged = db.prepare(query).all()
             db.chiudi();
             res.send(new Response(req, logged))
         } catch (e) { res.send(new Response(req, logged, e.message)); }
