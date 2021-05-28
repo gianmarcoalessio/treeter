@@ -1,5 +1,12 @@
-function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toLocaleString();
-}
+var a = new Date("2/5/2013")
+var b = new Date("2/2/2016")
+var c = new Date("2/22/2010")
 
-console.log(randomDate(new Date(2012, 0, 1), new Date()))
+// var a = 1
+// var b = 3
+// var c = 2
+
+var tmp = [a, b, c]
+//tmp.sort(function (x, y) { return x - y })
+tmp.sort((x, y) => x - y)
+console.log(tmp)
