@@ -9,7 +9,7 @@ function randomint(n) {
 }
 
 function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toLocaleString();
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toLocaleString("en-US");
 }
 
 function randomvec(v) {

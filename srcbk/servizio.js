@@ -152,7 +152,7 @@ router
                         src: follow.picture,
                         name: follow.name + " " + follow.surname,
                         username: follow.username,
-                        time: treet.date,
+                        time: new Date(treet.date),
                         tweet: treet.content,
                         tid: treet.id,
                         comments: treet.nc,
@@ -162,8 +162,8 @@ router
                 }
             }
 
-            tmp.sort((a, b) => { new Date(b.time) - new Date(a.time) })
-            console.log(new Date(tmp[0].time) - new Date(tmp[1].time))
+            // per far funzionare il sort si deve definire il "new Date" nella definizione della variabile e non dentro il sort
+            tmp.sort((a, b) => b.time - a.time)
             db.chiudi();
             res.send(new Response(req, tmp))
 
