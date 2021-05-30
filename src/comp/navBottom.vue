@@ -9,7 +9,7 @@
       ></i>
       <!-- <img src="profile.png" alt="" class="w-10 h-10 rounded-full border border-lighter" />  -->
       <div class="hidden lg:block ml-1">
-        <p class="text-sm font-bold leading-tight">Your Name</p>
+        <p class="text-sm font-bold leading-tight">MY Name</p>
         <p class="text-sm leading-tight">@username</p>
       </div>
       <i class="hidden lg:block fas fa-angle-down ml-auto text-lg"></i>
