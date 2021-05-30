@@ -1,8 +1,10 @@
 const { randomInt } = require("crypto")
 const LoremIpsum = require("lorem-ipsum").LoremIpsum
 const fs = require("fs")
-var { database } = require("liburno_lib")
+var { database, init } = require("liburno_lib")
 var db1 = database.db("data/comuni.db")
+
+init()
 
 function randomint(n) {
     return Math.floor(Math.random() * n) //valore casuale da 0 a n-1
@@ -83,9 +85,8 @@ var esiste = fs.existsSync(file)
 console.log(esiste)
 var db = database.db(file)
 
-//non funziona!!!!!!
 if (!esiste) {
-    db.prepare(`
+    db.run(`
     -- creazione
 CREATE TABLE if not exists followers (
    user NVARCHAR COLLATE NOCASE DEFAULT '',
@@ -101,8 +102,11 @@ CREATE TABLE if not exists treets (
    date NVARCHAR COLLATE NOCASE DEFAULT '',
    isretreet NVARCHAR COLLATE NOCASE DEFAULT '',
    iscomment NVARCHAR COLLATE NOCASE DEFAULT '',
-   content NVARCHAR COLLATE NOCASE DEFAULT ''
+   content NVARCHAR COLLATE NOCASE DEFAULT '',
+   primary key (id)
 );
+-- CREATE INDEX ix_treets_isretreet on treets (isretreet);
+-- CREATE INDEX ix_treets_iscomment on treets (iscomment);
 CREATE TABLE if not exists users (
    id NVARCHAR COLLATE NOCASE DEFAULT '',
    username NVARCHAR COLLATE NOCASE DEFAULT '',
@@ -112,9 +116,10 @@ CREATE TABLE if not exists users (
    email NVARCHAR COLLATE NOCASE DEFAULT '',
    sex NVARCHAR COLLATE NOCASE DEFAULT '',
    picture NVARCHAR COLLATE NOCASE DEFAULT '',
-   special INTEGER DEFAULT 0
+   special INTEGER DEFAULT 0,
+   primary key (id)
 );
-`).run()
+`)
 }
 
 

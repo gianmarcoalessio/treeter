@@ -76,11 +76,6 @@ export default {
   created() {
     bus.on("logged", (id) => {
       this.logged.id = id;
-
-      // this.following = post.post("servizio/jgAllQuery", {
-      //   query: "select * from treets limit 10",
-      // });
-      //console.log(id);
     });
     bus.on("logout", () => {
       this.logged.id = "";

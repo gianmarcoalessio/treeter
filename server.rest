@@ -21,7 +21,7 @@ POST http://localhost:3000/servizio/jgFeed
 content-type: application/json
 
 {
- "logged":"u102727"
+ "logged":"u86023"
 }
 
 

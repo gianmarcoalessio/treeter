@@ -18,3 +18,5 @@ WLOG: t203 (id treet)
 LEN(ALL) select id from treets where isRetreet='t203'
 LEN(ALL) select id from treets where isComment='t203'
 LEN(ALL) select user from likes where liked='t203'
+
+

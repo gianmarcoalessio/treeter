@@ -67,7 +67,6 @@ export default {
       });
       this.logged.name = this.logged.name + " "; //per aggiungere lo spazio tra nome e cognome senza rompere il codice in riga 31
       bus.emit("logged", this.logged.id);
-      //console.log(this.logged.id);
     },
     logout() {
       this.logged = {};
