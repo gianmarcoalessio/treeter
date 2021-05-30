@@ -59,6 +59,14 @@
 import { bus } from "@eng/bus";
 import { post } from "@eng/post";
 export default {
+  async created() {
+    await this.login();
+    console.log(this.logged);
+  },
+  beforeUnmount() {
+    this.logged = {};
+    bus.emit("logout");
+  },
   methods: {
     async login() {
       this.logged = await post.post("servizio/jgGetQuery", {
