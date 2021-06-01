@@ -106,7 +106,7 @@ router
                 treet.username = t.username
                 treet.retweets = query1.get(treet.tid).count
                 treet.comments = query2.get(treet.tid).count
-                treet.like = query3.get(treet.tid).count
+                treet.likes = query3.get(treet.tid).count
                 treet.time = toTime(treet.date)
             }
 

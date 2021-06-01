@@ -6,17 +6,16 @@
     :key="i"
     class="flex flex-col-reverse w-full p-4 border-b hover:bg-lighter"
   >
-    <!-- <jgTreet
-      :src="myUser.src"
-      :name="myUser.name"
-      :username="myUser.username"
-      :time="myUser.time"
-      :tweet="treet.content"
-      :comments="myUser.comments"
-      :retweets="myUser.retweets"
-      :like="myUser.like"
-    /> -->
-    <pre>{{ treet }}</pre>
+    <jgTreet
+      :src="treet.src"
+      :name="treet.name"
+      :username="treet.username"
+      :time="String(treet.time)"
+      :tweet="treet.tweet"
+      :comments="String(treet.comments)"
+      :retweets="String(treet.retweets)"
+      :likes="String(treet.likes)"
+    />
   </div>
   <button v-if="hasmore" @click="load(page)">more</button>
   <!-- following -->

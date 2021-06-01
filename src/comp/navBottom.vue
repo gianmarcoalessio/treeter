@@ -61,7 +61,7 @@ import { post } from "@eng/post";
 export default {
   async created() {
     await this.login();
-    console.log(this.logged);
+    //console.log(this.logged);
   },
   beforeUnmount() {
     this.logged = {};

@@ -42,7 +42,7 @@ export default {
       bottom: [
         { icon: "far fa-comment", title: this.comments },
         { icon: "fas fa-retweet", title: this.retweets },
-        { icon: "fas fa-heart", title: this.like },
+        { icon: "fas fa-heart", title: this.likes },
         { icon: "fas fa-share-square", title: "" },
       ],
     };
@@ -55,7 +55,7 @@ export default {
     tweet: String,
     comments: String,
     retweets: String,
-    like: String,
+    likes: String,
   },
 };
 </script>

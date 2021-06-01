@@ -1,6 +1,6 @@
 <template>
-    <i :class="input" class="mr-3"></i>
-    <p>{{ title }}</p>
+  <i :class="input" class="mr-3"></i>
+  <p>{{ title }}</p>
 </template>
 
 <script>
@@ -10,10 +10,9 @@ export default {
     title: String,
   },
   data() {
-    return {
-    }
-  }
-}
+    return {};
+  },
+};
 </script>
 
 <style>
