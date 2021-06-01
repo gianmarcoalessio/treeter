@@ -17,11 +17,12 @@ content-type: application/json
 
 ###
 
-POST http://localhost:3000/servizio/jgFeed
+POST http://localhost:3000/servizio/jgFeedMore
 content-type: application/json
 
 {
- "logged":"u86023"
+ "logged":"u82371",
+ "page": 0
 }
 
 

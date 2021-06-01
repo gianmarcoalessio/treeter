@@ -9,7 +9,7 @@
       ></i>
       <!-- <img src="profile.png" alt="" class="w-10 h-10 rounded-full border border-lighter" />  -->
       <div class="hidden lg:block ml-1">
-        <p class="text-sm font-bold leading-tight">MY Name</p>
+        <p class="text-sm font-bold leading-tight">Your Name</p>
         <p class="text-sm leading-tight">@username</p>
       </div>
       <i class="hidden lg:block fas fa-angle-down ml-auto text-lg"></i>
@@ -69,10 +69,7 @@ export default {
   },
   methods: {
     async login() {
-      this.logged = await post.post("servizio/jgGetQuery", {
-        query:
-          "select id,username,name,surname,age,email,sex,picture,special from users order by random()",
-      });
+      this.logged = await post.post("servizio/jgLog", {});
       this.logged.name = this.logged.name + " "; //per aggiungere lo spazio tra nome e cognome senza rompere il codice in riga 31
       bus.emit("logged", this.logged.id);
     },

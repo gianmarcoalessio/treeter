@@ -13,7 +13,7 @@
     <!-- Treets -->
     <div class="w-full md:w-1/2 h-full overflow-y-scroll">
       <jgTritta @treets="tritta($event)" />
-      <jgTreets :treets="treets" />
+      <jgTreets />
     </div>
     <!-- Trending -->
     <div
@@ -32,9 +32,6 @@ import jgTritta from "@comp/tritta.vue";
 import jgTrending from "@comp/trending.vue";
 
 export default {
-  data() {
-    return { treets: [] };
-  },
   components: {
     jgNavTop,
     jgNavBottom,

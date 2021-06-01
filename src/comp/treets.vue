@@ -6,7 +6,7 @@
     :key="i"
     class="flex flex-col-reverse w-full p-4 border-b hover:bg-lighter"
   >
-    <jgTreet
+    <!-- <jgTreet
       :src="myUser.src"
       :name="myUser.name"
       :username="myUser.username"
@@ -15,8 +15,10 @@
       :comments="myUser.comments"
       :retweets="myUser.retweets"
       :like="myUser.like"
-    />
+    /> -->
+    <pre>{{ treet }}</pre>
   </div>
+  <button v-if="hasmore" @click="load(page)">more</button>
   <!-- following -->
   <div
     v-for="(follow, i) in following"
@@ -65,21 +67,44 @@ export default {
           like: "5,000,103",
         },
       ],
+      treets: [],
+      page: 0,
+      hasmore: false,
     };
-  },
-  props: {
-    treets: Array,
   },
   components: {
     jgTreet,
   },
+  methods: {
+    async load(page) {
+      var t = await post.post("servizio/jgFeedMore", {
+        logged: this.logged.id,
+        page,
+      });
+      if (this.page == 0) {
+        this.treets = t.treets;
+      } else {
+        for (var tm of t.treets) {
+          this.treets.push(tm);
+        }
+      }
+      console.log(this.treets.length);
+      this.hasmore = t.hasmore;
+      this.page++;
+    },
+  },
   created() {
     bus.on("logged", (id) => {
       this.logged.id = id;
+      this.load(0);
     });
     bus.on("logout", () => {
       this.logged.id = "";
     });
+  },
+  beforeUnmount() {
+    bus.off("logged");
+    bus.off("logout");
   },
 };
 </script>

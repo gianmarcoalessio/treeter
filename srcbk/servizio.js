@@ -5,6 +5,29 @@ const { init, B, Response, dm } = require('liburno_bklib');
 const MAXTWEET = 20
 init();
 
+function toTime(d) {
+    function toTimeTreets(n) {
+        if (Math.floor(n / 60) == 0) {
+            return `${n} sec ago`
+        } else if (Math.floor(n / 3600) == 0) {
+            return `${Math.floor(n / 60)} min ago`
+        } else if (Math.floor(n / 86400) == 0) {
+            return `${Math.floor(n / 3600)} h ago`
+        } else if (Math.floor(n / 604800) == 0) {
+            return `${Math.floor(n / 86400)} d ago`
+        } else if (Math.floor(n / 2592000) == 0) {
+            return `${Math.floor(n / 604800)} w ago`
+        } else if (Math.floor(n / 31536000) == 0) {
+            return `${Math.floor(n / 2592000)} m ago`
+        } else {
+            return `${Math.floor(n / 31536000)} y ago`
+        }
+    }
+
+    var now = new Date().toFloat().toDate()
+    var d1 = Number(d).toDate()
+    return toTimeTreets((now - d1) / 1000)
+}
 
 const dbTreeter = () => {
     var ff = dm.getfile("../data/treeter.db");
@@ -49,128 +72,50 @@ router
         } catch (e) { res.send(new Response(req, undefined, e.message)); }
     })
 
-    // .post('/jgLog', (req, res) => {
-    //     try {
-    //         var db = dbTreeter();
-    //         var logged = db.prepare("select id,username,name,surname,age,email,sex,picture,special from users order by random()").get()
-    //         db.chiudi();
-    //         res.send(new Response(req, logged))
-    //     } catch (e) { res.send(new Response(req, logged, e.message)); }
-    // })
-
-    .post('/jgGetQuery', (req, res) => {
+    .post('/jgLog', (req, res) => {
         try {
-            var { req, data } = jgGetQuery(req, res)
-            res.send(new Response(req, data))
-        } catch (e) { res.send(new Response(req, data, e.message)); }
+            var db = dbTreeter();
+            var logged = db.prepare("select id,username,name,surname,age,email,sex,picture,special from users order by random()").get()
+            db.chiudi();
+            res.send(new Response(req, logged))
+        } catch (e) { res.send(new Response(req, logged, e.message)); }
     })
 
-    .post('/jgAllQuery', (req, res) => {
-        try {
-            var { req, data } = jgAllQuery(req, res)
-            res.send(new Response(req, data))
-        } catch (e) { res.send(new Response(req, data, e.message)); }
-    })
-
-    // // .post('/jgFeed', (req, res) => {
-    // //     try {
-    // //         var db = dbTreeter();
-
-    // //         var { logged } = req.body
-    // //         query = `select following as id from followers where user = ?`
-    // //         var following = db.prepare(query).all(logged)
-
-    // //         for (follow of following) {
-    // //             query = `select picture, name, surname, username from users where id = ?`
-    // //             follow.picture = db.prepare(query).get(follow.id).picture
-    // //             follow.name = db.prepare(query).get(follow.id).name
-    // //             follow.surname = db.prepare(query).get(follow.id).surname
-    // //             follow.username = db.prepare(query).get(follow.id).username
-
-    // //             query = `select id, date, content, isRetreet from treets where author = ? and isComment = ''`
-    // //             follow.treets = db.prepare(query).all(follow.id)
-
-    // //             for (treet of follow.treets) {
-
-    // //                 query = `select id from treets where isRetreet=?`
-    // //                 treet.nr = db.prepare(query).all(treet.id).length
-
-    // //                 query = `select id from treets where isComment=?`
-    // //                 treet.nc = db.prepare(query).all(treet.id).length
-
-    // //                 query = `select user from likes where liked=?`
-    // //                 treet.nl = db.prepare(query).all(treet.id).length
-
-    // //             }
-    // //         }
-    // //         db.chiudi();
-    // //         res.send(new Response(req, following))
-
-    // //     } catch (e) {
-    // //         res.send(new Response(req, following, e.message));
-    // //     }
-
-    // // })
-
-    .post('/jgFeed', (req, res) => {
+    //servizio che mi da la pagina successiva
+    .post('/jgFeedMore', (req, res) => {
         try {
             var db = dbTreeter();
 
-            var { logged } = req.body
-            query = `select following as id from followers where user = ?`
-            var following = db.prepare(query).all(logged)
+            var { logged, page } = req.body
+            var query = db.prepare(`select picture, name, surname, username from users where id = ?`)
             var query1 = db.prepare(`select count(id) as count from treets where isRetreet=?`)
             var query2 = db.prepare(`select count(id) as count from treets where isComment=?`)
             var query3 = db.prepare(`select count(user) as count from likes where liked=?`)
             // con querydefinitiva sostituisco i cicli for e ottengo gia solo i primi 20 in ordine cronologico
-            var querydefinitiva = `select id, date, content, isRetreet from treets where author in (select distinct following from followers where user = ?) or author = ? order by date desc limit ${MAXTWEET + 1}`
-            for (follow of following) {
-                query = `select picture, name, surname, username from users where id = ?`
-                var t = db.prepare(query).get(follow.id)
-                follow.picture = t.picture
-                follow.name = t.name
-                follow.surname = t.surname
-                follow.username = t.username
-
-                query = `select id, date, content, isRetreet from treets where author = ? and isComment = ''`
-                follow.treets = db.prepare(query).all(follow.id)
-
-                for (treet of follow.treets) {
-
-                    treet.nr = query1.get(treet.id).count
-                    treet.nc = query2.get(treet.id).count
-                    treet.nl = query3.get(treet.id).count
-
-                }
+            var hasmore = false
+            var querydefinitiva = `select id as tid, date, content as tweet, isRetreet, author as uid from treets where author in (select following from followers where user = ?) or author = ? order by date desc limit ${page * MAXTWEET},${MAXTWEET + 1}`
+            var treets = db.prepare(querydefinitiva).all(logged, logged)
+            if (treets.length > MAXTWEET) {
+                hasmore = true;
+                treets.pop();
             }
-
-            //andiamo a riformattare i treet per poterci fare un sorting
-
-            var tmp = []
-            for (follow of following) {
-                for (treet of follow.treets) {
-                    tmp.push({
-                        uid: follow.id,
-                        src: follow.picture,
-                        name: follow.name + " " + follow.surname,
-                        username: follow.username,
-                        time: new Date(treet.date),
-                        tweet: treet.content,
-                        tid: treet.id,
-                        comments: treet.nc,
-                        retweets: treet.nr,
-                        like: treet.nl
-                    })
-                }
+            for (treet of treets) {
+                var t = query.get(treet.uid)
+                treet.src = t.picture
+                treet.name = t.name + " " + t.surname
+                treet.username = t.username
+                treet.retweets = query1.get(treet.tid).count
+                treet.comments = query2.get(treet.tid).count
+                treet.like = query3.get(treet.tid).count
+                treet.time = toTime(treet.date)
             }
 
             // per far funzionare il sort si deve definire il "new Date" nella definizione della variabile e non dentro il sort
-            tmp.sort((a, b) => b.time - a.time)
             db.chiudi();
-            res.send(new Response(req, tmp))
+            res.send(new Response(req, { treets, hasmore }))
 
         } catch (e) {
-            res.send(new Response(req, tmp, e.message));
+            res.send(new Response(req, treets, e.message));
         }
 
     })
