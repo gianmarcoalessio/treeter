@@ -3,6 +3,7 @@ const LoremIpsum = require("lorem-ipsum").LoremIpsum
 const fs = require("fs")
 var { database, init } = require("liburno_lib")
 var db1 = database.db("data/comuni.db")
+const IDLENGTH = 15
 
 init()
 
@@ -30,7 +31,7 @@ for (var u of users) {
     u.name = n[0]
     u.surname = n[1]
     u.age = u.dtnascita
-    u.id = "u" + u.rowid
+    u.id = "u" + "0".repeat(IDLENGTH - String(u.rowid).length) + u.rowid
     u.username = "@" + n[0].toLowerCase() + n[1].toLowerCase()
     u.sex = randomvec(sex)
     u.email = n[0].toLowerCase() + "." + n[1].toLowerCase() + "@gmail.com"
@@ -58,12 +59,15 @@ const lorem = new LoremIpsum({
     }
 });
 //tabella treets
+var tm = 0
 for (var i = 1; i < 1001; i++) {
-    tmp.id = "t" + i
+    tmp.id = "t" + "0".repeat(IDLENGTH - String(i).length) + i
     tmp.author = randomvec(users).id
-    tmp.isRetreet = randomvec(["", "t" + (1 + randomInt(1000))])
+    tm = 1 + randomInt(1000)
+    tmp.isRetreet = randomvec(["", "t" + "0".repeat(IDLENGTH - String(tm).length) + tm])
     if (tmp.isRetreet == "") {
-        tmp.isComment = randomvec(["", "t" + (1 + randomInt(1000))])
+        tm = 1 + randomInt(1000)
+        tmp.isComment = randomvec(["", "t" + "0".repeat(IDLENGTH - String(tm).length) + tm])
     } else {
         tmp.isComment = ""
     }

@@ -17,24 +17,7 @@
       :likes="String(treet.likes)"
     />
   </div>
-  <button v-if="hasmore" @click="load(page)">more</button>
-  <!-- following -->
-  <div
-    v-for="(follow, i) in following"
-    :key="i"
-    class="flex flex-col-reverse w-full p-4 border-b hover:bg-lighter"
-  >
-    <jgTreet
-      :src="follow.src"
-      :name="follow.name"
-      :username="follow.username"
-      :time="follow.time"
-      :tweet="follow.tweet"
-      :comments="follow.comments"
-      :retweets="follow.retweets"
-      :like="follow.like"
-    />
-  </div>
+  <button v-if="hasmore" @click="load(page)" class="ml-44">more</button>
 </template>
 
 <script>
@@ -45,27 +28,6 @@ export default {
   data() {
     return {
       logged: {},
-      myUser: {
-        src: "",
-        name: "User",
-        username: "@username",
-        time: "1s",
-        comments: "0",
-        retweets: "0",
-        like: "0",
-      },
-      following: [
-        {
-          src: "elon.jpg",
-          name: "giammi",
-          username: "@teslaBoy2",
-          //time: "1.4 hr",
-          tweet: "Grazie :)",
-          comments: "100,500",
-          retweets: "1,000,032",
-          like: "5,000,103",
-        },
-      ],
       treets: [],
       page: 0,
       hasmore: false,
@@ -95,10 +57,12 @@ export default {
   created() {
     bus.on("logged", (id) => {
       this.logged.id = id;
+      this.treets = [];
       this.load(0);
     });
     bus.on("logout", () => {
       this.logged.id = "";
+      this.treets = [];
     });
   },
   beforeUnmount() {

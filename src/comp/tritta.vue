@@ -6,20 +6,20 @@
     <i class="fas fa-tree text-2xl font-medium text-darkgreen"></i>
   </div>
 
-  <jgTrittaBottom @treets="tritta($event)"  />
+  <jgTrittaBottom @treets="tritta($event)" />
 </template>
 
 <script>
-import jgTrittaBottom from "@comp/trittaBottom.vue"
+import jgTrittaBottom from "@comp/trittaBottom.vue";
 export default {
-    components:{
-        jgTrittaBottom,
+  components: {
+    jgTrittaBottom,
+  },
+  methods: {
+    tritta(x) {
+      this.$emit("treets", x);
     },
-    methods: {
-        tritta(x){
-          this.$emit("treets",x);
-        }
-    },
+  },
 };
 </script>
 
