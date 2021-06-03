@@ -1,5 +1,5 @@
 ###
-POST http://localhost:3000/servizio/jServizio
+POST http://localhost:3010/servizio/jServizio
 content-type: application/json
 
 {
@@ -8,7 +8,7 @@ content-type: application/json
 
 ###
 
-POST http://localhost:3000/servizio/jgLog
+POST http://localhost:3010/servizio/jgLog
 content-type: application/json
 
 {
@@ -17,13 +17,24 @@ content-type: application/json
 
 ###
 
-POST http://localhost:3000/servizio/jgFeedMore
+POST http://localhost:3010/servizio/jgFeedMore
 content-type: application/json
 
 {
  "logged":"u82371",
  "page": 0
 }
+###
+
+POST http://localhost:3010/servizio/jgNewTreet
+content-type: application/json
+
+{
+        "content": "I love you Baby",
+        "author": "u000000000008523",
+        "isComment": "",
+        "isRetreet": "",
+      }
 
 
 

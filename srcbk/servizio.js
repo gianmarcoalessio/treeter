@@ -3,6 +3,7 @@ const router = require('express').Router();
 const path = require("path");
 const { init, B, Response, dm } = require('liburno_bklib');
 const MAXTWEET = 20
+const IDLENGTH = 15
 init();
 
 function toTime(d) {
@@ -118,6 +119,21 @@ router
             res.send(new Response(req, treets, e.message));
         }
 
+    })
+
+    .post('/jgNewTreet', (req, res) => {
+        try {
+            var db = dbTreeter();
+            query = 'select MAX(id) as last from treets'
+            var { last } = db.prepare(query).get()
+            var nid = Number(last.slice(1)) + 1
+            var tid = "t" + "0".repeat(IDLENGTH - String(nid).length) + nid
+            var date = new Date().toFloat()
+            query = db.prepare("insert or replace into treets(id, author, isretreet, date, iscomment, content) values(?,?,?,?,?,?)")
+            query.run(tid, req.body.author, req.body.isRetreet, date, req.body.isComment, req.body.content)
+            db.chiudi();
+            res.send(new Response(req))
+        } catch (e) { res.send(new Response(req, e.message)); }
     })
 
 

@@ -24,8 +24,6 @@
 </template>
 
 <script>
-import { post } from "@eng/post";
-import { bus } from "@eng/bus";
 import jgTrittaIcons from "@comp/trittaIcons.vue";
 export default {
   components: {
@@ -33,7 +31,7 @@ export default {
   },
   data() {
     return {
-      logged: {},
+      //logged: {},
       tweet: { content: "" },
       icons: [
         "far fa-image",
@@ -46,23 +44,26 @@ export default {
 
   methods: {
     async addNewTweet() {
-      //var
-      var t = await post.post("servizio/jgTritta", {
+      var t = await this.$fetch("servizio/jgNewTreet", {
         content: this.tweet.content,
+        author: this.logged.id,
+        isComment: "",
+        isRetreet: "",
       });
     },
   },
   created() {
-    bus.on("logged", (id) => {
+    //console.log(this.treets);
+    this.$globalon("logged", (id) => {
       this.logged.id = id;
     });
-    bus.on("logout", () => {
+    this.$globalon("logout", () => {
       this.logged.id = "";
     });
   },
   beforeUnmount() {
-    bus.off("logged");
-    bus.off("logout");
+    this.$globaloff("logged");
+    this.$globaloff("logout");
   },
 };
 </script>

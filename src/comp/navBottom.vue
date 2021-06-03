@@ -60,8 +60,6 @@
 </template>
 
 <script>
-import { bus } from "@eng/bus";
-import { post } from "@eng/post";
 export default {
   async created() {
     await this.login();
@@ -69,17 +67,17 @@ export default {
   },
   beforeUnmount() {
     this.logged = {};
-    bus.emit("logout");
+    this.$globalemit("logout");
   },
   methods: {
     async login() {
-      this.logged = await post.post("servizio/jgLog", {});
+      this.logged = await this.$fetch("servizio/jgLog", {});
       this.logged.name = this.logged.name + " "; //per aggiungere lo spazio tra nome e cognome senza rompere il codice in riga 31
-      bus.emit("logged", this.logged.id);
+      this.$globalemit("logged", this.logged.id);
     },
     logout() {
       this.logged = {};
-      bus.emit("logout");
+      this.$globalemit("logout");
     },
   },
   data() {
