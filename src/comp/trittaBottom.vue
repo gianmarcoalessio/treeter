@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      //logged: {},
+      logged: {},
       tweet: { content: "" },
       icons: [
         "far fa-image",

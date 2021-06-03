@@ -25,14 +25,32 @@ import jgTreet from "@comp/treet.vue";
 export default {
   data() {
     return {
-      //logged: {},
-      //treets: [],
-      //page: 0,
-      //hasmore: false,
+      logged: {},
+      treets: [],
+      page: 0,
+      hasmore: false,
     };
   },
   components: {
     jgTreet,
+  },
+  methods: {
+    async load(page) {
+      var t = await this.$fetch("servizio/jgFeedMore", {
+        logged: this.logged.id,
+        page,
+      });
+      if (this.page == 0) {
+        this.treets = t.treets;
+      } else {
+        for (var tm of t.treets) {
+          this.treets.push(tm);
+        }
+      }
+      console.log(this.treets.length);
+      this.hasmore = t.hasmore;
+      this.page++;
+    },
   },
   created() {
     this.$globalon("logged", (id) => {

@@ -24,31 +24,9 @@ export default {
 
     app.mixin({
       data() {
-        return {
-          treets: [],
-          page: 0,
-          hasmore: false,
-          logged: {}
-        }
+        return {}
       },
-      methods: {
-        async load(page) {
-          var t = await this.$fetch("servizio/jgFeedMore", {
-            logged: this.logged.id,
-            page,
-          });
-          if (this.page == 0) {
-            this.treets = t.treets;
-          } else {
-            for (var tm of t.treets) {
-              this.treets.push(tm);
-            }
-          }
-          console.log(this.treets.length);
-          this.hasmore = t.hasmore;
-          this.page++;
-        },
-      }
+      methods: {},
     })
 
   }

@@ -61,6 +61,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      logged: {},
+    };
+  },
   async created() {
     await this.login();
     //console.log(this.logged);
