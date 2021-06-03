@@ -20,6 +20,7 @@ export default {
     app.config.globalProperties.$globaloff = (key, fn) => {
       return bus.off(key, fn);
     }
+    //app.config.globalProperties.$treets=[]
 
     app.mixin({
       data() {
