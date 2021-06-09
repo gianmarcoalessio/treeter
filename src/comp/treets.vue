@@ -17,7 +17,7 @@
       :likes="String(treet.likes)"
     />
   </div>
-  <button v-if="hasmore" @click="load(page)" class="ml-44">more</button>
+  <!-- <button v-if="hasmore" @click="load(page)" class="ml-44">more</button> -->
 </template>
 
 <script>
@@ -45,10 +45,10 @@ export default {
     //   this.hasmore = t.hasmore;
     //   this.page++;
     // },
-    async load(page) {
+    async load() {
       var t = await this.$fetch("servizio/jgFeedMore", {
         logged: this.logged.id,
-        page,
+        page: this.page,
       });
       if (this.page == 0) {
         this.treets = t.treets;
@@ -73,7 +73,7 @@ export default {
       this.treets = [];
     });
     this.load(0);
-    this.$globalon("more", this.load(this.page));
+    this.$globalon("more", this.load);
   },
   beforeUnmount() {
     this.$globaloff("logged");

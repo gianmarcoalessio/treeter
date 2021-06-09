@@ -7,13 +7,14 @@
       <button
         class="
           text-2xl
-          bg-base-600
-          text-white
+          bg-opacity-50 bg-lightest
+          text-darkgreen
           w-10
           h-10
           shadow-md
           rounded-full
-          hover:bg-base-800
+          hover:bg-lighter
+          focus:outline-none
         "
         @click="scrolltop()"
       >
@@ -47,7 +48,7 @@ export default {
       }
     },
     scrolltop() {
-      var el = this.$refs.main;
+      var el = this.$refs.contenitore;
       el.scrollTop = 0;
     },
   },

@@ -1,16 +1,15 @@
 <template>
-    <jgMain />
+  <jgMain />
 </template>
 
 <script>
-import jgMain from  "@comp/main.vue"
+import jgMain from "@comp/main.vue";
 export default {
-    components: {
-        jgMain,
-    },
-    data(){
-        return{
-        }
-    }
+  components: {
+    jgMain,
+  },
+  data() {
+    return {};
+  },
 };
 </script>

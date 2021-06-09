@@ -2,7 +2,15 @@
   <div class="flex container h-screen w-full">
     <!-- side nav -->
     <div
-      class="lg:w-1/5 border-r border-lighter px-2 lg:px-6 py-2 flex flex-col justify-between"
+      class="
+        lg:w-1/5
+        border-r border-lighter
+        px-2
+        lg:px-6
+        py-2
+        flex flex-col
+        justify-between
+      "
     >
       <jgNavTop />
       <jgNavBottom>
@@ -11,16 +19,23 @@
       </jgNavBottom>
     </div>
     <!-- Treets -->
-
-    <div class="w-full md:w-1/2 h-full overflow-y-scroll">
+    <d-scrollmanager class="md:w-1/2">
       <jgTritta @treets="tritta($event)" />
-      <d-scrollmanager>
-        <jgTreets />
-      </d-scrollmanager>
-    </div>
+      <jgTreets />
+    </d-scrollmanager>
     <!-- Trending -->
     <div
-      class="md:block hidden w-1/3 h-full border-l border-lighter py-2 px-6 overflow-y-scroll relative"
+      class="
+        md:block
+        hidden
+        w-1/3
+        h-full
+        border-l border-lighter
+        py-2
+        px-6
+        overflow-y-scroll
+        relative
+      "
     >
       <jgTrending />
     </div>
