@@ -35,6 +35,16 @@ export default {
     jgTreet,
   },
   methods: {
+    // async load() {
+    //   var t = await this.$fetch("servizio/jGetPage", { page:this.page });
+    //   if (this.page == 0) {
+    //     this.data = t.data;
+    //   } else {
+    //     for (var tm of t.data) { this.data.push(tm) };
+    //   }
+    //   this.hasmore = t.hasmore;
+    //   this.page++;
+    // },
     async load(page) {
       var t = await this.$fetch("servizio/jgFeedMore", {
         logged: this.logged.id,
@@ -62,10 +72,13 @@ export default {
       this.logged.id = "";
       this.treets = [];
     });
+    this.load(0);
+    this.$globalon("more", this.load(this.page));
   },
   beforeUnmount() {
-    this.globaloff("logged");
-    this.globaloff("logout");
+    this.$globaloff("logged");
+    this.$globaloff("logout");
+    this.$globaloff("more");
   },
 };
 </script>

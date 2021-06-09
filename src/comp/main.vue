@@ -11,9 +11,12 @@
       </jgNavBottom>
     </div>
     <!-- Treets -->
+
     <div class="w-full md:w-1/2 h-full overflow-y-scroll">
       <jgTritta @treets="tritta($event)" />
-      <jgTreets />
+      <d-scrollmanager>
+        <jgTreets />
+      </d-scrollmanager>
     </div>
     <!-- Trending -->
     <div

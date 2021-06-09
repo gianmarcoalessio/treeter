@@ -33,7 +33,7 @@ content-type: application/json
         "content": "I love you Baby",
         "author": "u000000000008523",
         "isComment": "",
-        "isRetreet": "",
+        "isRetreet": ""
       }
 
 
