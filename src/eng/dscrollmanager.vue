@@ -43,7 +43,7 @@ export default {
       var v = this.$refs.contenitore;
       this.stylebtntop = { display: v.scrollTop > 0 ? "block" : "none" };
       this.smallmenu = v.scrollTop < 50 ? false : true;
-      if (v.scrollTop + v.getClientRects()[0].height * 1.3 > v.scrollHeight) {
+      if (v.scrollTop + v.getClientRects()[0].height * 1.1 > v.scrollHeight) {
         bus.emit("more");
       }
     },
