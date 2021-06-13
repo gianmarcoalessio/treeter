@@ -1,5 +1,5 @@
 <template>
-  <div class="flex" @click="gotomain()">
+  <div class="flex">
     <div class="flex-none mr-4">
       <!-- <img :src="`${follow.src}`" class="h-12 w-12 rounded-full flex-none"/> -->
       <i
@@ -27,13 +27,14 @@
         {{ tweet }}
       </p>
 
-      <div class="flex items-center w-full justify-between">
+      <div class="flex items-center w-1/2 justify-between">
         <div
           v-for="(bot, i) in bottom"
           :key="i"
           class="flex items-center text-sm text-dark"
         >
-          <jgTreetIcon :input="bot.icon" :title="bot.title" />
+          <i class="mr-3" :class="bot.icon"></i>
+          <p>{{ bot.title }}</p>
         </div>
       </div>
     </div>
@@ -41,31 +42,25 @@
 </template>
 
 <script>
-import jgTreetIcon from "@comp/TreetIcon.vue";
 export default {
-  components: {
-    jgTreetIcon,
-  },
   data() {
     return {
+      id: this.$route.params.id,
+      src: "",
+      name: "Alfonso",
+      username: "alf98",
+      time: "2 sec",
+      tweet: "ciao",
+      comments: "2",
+      retweets: "33",
+      likes: "2341",
       bottom: [
-        { icon: "far fa-comment", title: this.comments },
-        { icon: "fas fa-retweet", title: this.retweets },
-        { icon: "fas fa-heart", title: this.likes },
+        { icon: "far fa-comment", title: "2" },
+        { icon: "fas fa-retweet", title: "33" },
+        { icon: "fas fa-heart", title: "2341" },
         { icon: "fas fa-share-square", title: "" },
       ],
     };
-  },
-  props: {
-    id: String,
-    src: String,
-    name: String,
-    username: String,
-    time: String,
-    tweet: String,
-    comments: String,
-    retweets: String,
-    likes: String,
   },
   methods: {
     gotomain() {

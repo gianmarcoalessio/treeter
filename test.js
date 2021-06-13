@@ -27,9 +27,14 @@ db.prepare(query1).run(id, 'u000000000079535', '', date, '', "Giammi Yoga is the
 
 
 // /////////
-// var a = new Date()
-// var b = new Date("2/2/2016")
-// var c = new Date("2/22/2010")
+
+Date.prototype.toFloatSec = function () {
+    return Math.floor(this.getDate() * 1000000 + (this.getMonth() + 1) * 100000000 + this.getFullYear() * 10000000000 + (this.getHours()) * 10000 + this.getMinutes() * 100 + this.getSeconds() + .5) / 1000000
+}
+
+var a = new Date()
+var b = new Date("2/2/2016")
+var c = new Date("2/22/2010")
 
 // // var a = 1
 // // var b = 3
@@ -40,10 +45,19 @@ db.prepare(query1).run(id, 'u000000000079535', '', date, '', "Giammi Yoga is the
 // tmp.sort((x, y) => x - y)
 
 // var d = 20131105.123433
+//console.log(d.toDate())
 
-// console.log(a.toInt())
-// console.log(a.toFloat())
-// console.log(d.toDate())
+console.log(a.toInt())
+console.log(a.toFloatSec())
+
+
+
+
+
+
+
+
+
 
 
 

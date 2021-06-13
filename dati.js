@@ -11,8 +11,12 @@ function randomint(n) {
     return Math.floor(Math.random() * n) //valore casuale da 0 a n-1
 }
 
+Date.prototype.toFloatSec = function () {
+    return Math.floor(this.getDate() * 1000000 + (this.getMonth() + 1) * 100000000 + this.getFullYear() * 10000000000 + (this.getHours()) * 10000 + this.getMinutes() * 100 + this.getSeconds() + .5) / 1000000
+}
+
 function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toFloat();
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toFloatSec();
 }
 
 function randomvec(v) {

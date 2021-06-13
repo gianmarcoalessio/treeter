@@ -1,15 +1,7 @@
 <template>
-  <jgMain />
+  <router-view />
 </template>
 
 <script>
-import jgMain from "@comp/main.vue";
-export default {
-  components: {
-    jgMain,
-  },
-  data() {
-    return {};
-  },
-};
+export default {};
 </script>
