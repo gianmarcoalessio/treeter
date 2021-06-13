@@ -12,7 +12,7 @@
         justify-between
       "
     >
-      <jgNavTop />
+      <jgNavTop :tabs="tabs" />
       <jgNavBottom>
         <!-- <template v-slot:utente>altri dati utente</template>    
                 <template v-slot:bottone> aggiungi nuovo utente </template> -->
@@ -50,6 +50,20 @@ import jgTritta from "@comp/tritta.vue";
 import jgTrending from "@comp/trending.vue";
 
 export default {
+  data() {
+    return {
+      tabs: [
+        { icon: "fas fa-home", title: "Home", id: "home" },
+        { icon: "fas fa-hashtag", title: "Explore", id: "explore" },
+        { icon: "far fa-bell", title: "Notifications", id: "notifications" },
+        { icon: "far fa-envelope", title: "Messages", id: "messages" },
+        { icon: "far fa-bookmark", title: "Bookmarks", id: "bookmarks" },
+        { icon: "fas fa-clipboard-list", title: "Lists", id: "lists" },
+        { icon: "far fa-user", title: "Profile", id: "profile" },
+        { icon: "fas fa-ellipsis-h", title: "More", id: "more" },
+      ],
+    };
+  },
   components: {
     jgNavTop,
     jgNavBottom,
