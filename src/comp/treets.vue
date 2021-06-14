@@ -6,6 +6,7 @@
     :key="i"
     class="flex flex-col-reverse w-full p-4 border-b hover:bg-lighter"
   >
+    <!-- <pre>{{ treet }}</pre> -->
     <jgTreet
       :id="treet.tid"
       :src="treet.src"

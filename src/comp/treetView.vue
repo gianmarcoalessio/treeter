@@ -24,17 +24,19 @@
         <i class="text-xl fas fa-arrow-left text-darkgreen"></i>
         <h1 class="text-xl ml-3 font-bold">Treet</h1>
       </div>
-      <div class="p-3">
+      <div class="p-3 border-b-4">
+        <pre>{{ treet }}</pre>
         <jgTreet
-          :id="id"
-          :src="src"
-          :name="name"
-          :username="username"
-          :time="String(time)"
-          :tweet="tweet"
-          :comments="String(comments)"
-          :retweets="String(retweets)"
-          :likes="String(likes)"
+          class="text-2xl"
+          :id="$route.params.id"
+          :src="treet.src"
+          :name="treet.name"
+          :username="treet.username"
+          :time="String(treet.time)"
+          :tweet="treet.tweet"
+          :comments="String(treet.comments)"
+          :retweets="String(treet.retweets)"
+          :likes="String(treet.likes)"
         />
       </div>
     </d-scrollmanager>
@@ -51,16 +53,7 @@ export default {
   },
   data() {
     return {
-      id: this.$route.params.id,
-      src: "",
-      name: "Alfonso",
-      username: "alf98",
-      time: "2 sec",
-      tweet: "ciao",
-      comments: "2",
-      retweets: "33",
-      likes: "2341",
-
+      treet: {},
       tabs: [
         { icon: "fas fa-search", title: "Search", id: "search" },
         { icon: "fas fa-cog font-medium", title: "Settings", id: "settings" },
@@ -68,10 +61,19 @@ export default {
     };
   },
   methods: {
+    async MainTreet() {
+      this.treet = await this.$fetch("servizio/jgGetTreet", {
+        tid: this.$route.params.id,
+      });
+      console.log(this.treet);
+    },
     gotomain() {
       this.$router.push("/treet/" + this.id);
       // this.$router.push("/treet/", { id: this.id }); DOMANDA
     },
+  },
+  async created() {
+    await this.MainTreet();
   },
 };
 </script>

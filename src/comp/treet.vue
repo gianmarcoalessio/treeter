@@ -4,11 +4,13 @@
       <!-- <img :src="`${follow.src}`" class="h-12 w-12 rounded-full flex-none"/> -->
       <i
         class="
+          text-base
           fas
           fa-user
           w-8
           h-8
-          p-2
+          pt-1
+          pl-2
           rounded-full
           border border-lighter
           flex-none
@@ -70,6 +72,7 @@ export default {
   methods: {
     gotomain() {
       this.$router.push("/treet/" + this.id);
+      console.log(this.retweets);
       // this.$router.push("/treet/", { id: this.id }); DOMANDA
     },
   },

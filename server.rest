@@ -36,6 +36,24 @@ content-type: application/json
         "isRetreet": ""
       }
 
+###
+
+POST http://localhost:3010/servizio/jgFeedTreet
+content-type: application/json
+
+{
+        "idt":"t000000000000065",
+        "page": 0
+      }
+
+###
+
+POST http://localhost:3010/servizio/jgGetTreet
+content-type: application/json
+
+{
+        "tid":"t000000000000065"
+      }
 
 
 
