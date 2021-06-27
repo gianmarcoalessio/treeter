@@ -20,13 +20,13 @@
     </div>
     <div class="w-full">
       <div class="flex items-center w-full">
-        <p class="font-semibold">{{ name }}</p>
-        <p class="text-sm text-dark ml-2">{{ username }}</p>
-        <p class="text-sm text-dark ml-2">{{ time }}</p>
+        <p class="font-semibold">{{ treet.name }}</p>
+        <p class="text-sm text-dark ml-2">{{ treet.username }}</p>
+        <p class="text-sm text-dark ml-2">{{ treet.time }}</p>
         <i class="fas fa-angle-down text-dark ml-auto"></i>
       </div>
       <p class="py-2">
-        {{ tweet }}
+        {{ treet.tweet }}
       </p>
 
       <div class="flex items-center w-full justify-between">
@@ -48,32 +48,35 @@ export default {
   components: {
     jgTreetIcon,
   },
-  data() {
-    return {
-      bottom: [
-        { icon: "far fa-comment", title: this.comments },
-        { icon: "fas fa-retweet", title: this.retweets },
-        { icon: "fas fa-heart", title: this.likes },
-        { icon: "fas fa-share-square", title: "" },
-      ],
-    };
-  },
   props: {
     id: String,
-    src: String,
-    name: String,
-    username: String,
-    time: String,
-    tweet: String,
-    comments: String,
-    retweets: String,
-    likes: String,
+    treet: { type: Object, default: {} },
+
+    // id: String,
+    // src: String,
+    // name: String,
+    // username: String,
+    // time: String,
+    // tweet: String,
+    // comments: { type: [String, Number], default: "" },
+    // retweets: String,
+    // likes: String,
   },
   methods: {
     gotomain() {
       this.$router.push("/treet/" + this.id);
       console.log(this.retweets);
       // this.$router.push("/treet/", { id: this.id }); DOMANDA
+    },
+  },
+  computed: {
+    bottom() {
+      return [
+        { icon: "far fa-comment", title: this.treet.comments },
+        { icon: "fas fa-retweet", title: this.treet.retweets },
+        { icon: "fas fa-heart", title: this.treet.likes },
+        { icon: "fas fa-share-square", title: "" },
+      ];
     },
   },
 };

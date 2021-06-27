@@ -7,7 +7,7 @@
 export default {
   props: {
     input: String,
-    title: String,
+    title: { type: [String, Number] },
   },
   data() {
     return {};

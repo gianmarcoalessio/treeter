@@ -2,7 +2,17 @@
   <div class="px-5 py-3 border-b-8 border-lighter flex">
     <div>
       <i
-        class="fas fa-user w-12 h-12 pt-2 pl-3.5 text-2xl rounded-full border border-lighter"
+        class="
+          fas
+          fa-user
+          w-12
+          h-12
+          pt-2
+          pl-3.5
+          text-2xl
+          rounded-full
+          border border-lighter
+        "
       ></i>
     </div>
     <form v-on:submit.prevent="addNewTweet" class="w-full px-4 relative">
@@ -15,7 +25,19 @@
         <jgTrittaIcons :icons="icons" />
       </div>
       <button
-        class="h-10 px-4 text-white font-semibold bg-green hover:bg-darkgreen focus:outline-none rounded-full absolute bottom-0 right-0"
+        class="
+          h-10
+          px-4
+          text-white
+          font-semibold
+          bg-green
+          hover:bg-darkgreen
+          focus:outline-none
+          rounded-full
+          absolute
+          bottom-0
+          right-0
+        "
       >
         Tweet
       </button>
@@ -50,6 +72,7 @@ export default {
         isComment: "",
         isRetreet: "",
       });
+      this.$globalemit("newTreet");
     },
   },
   created() {

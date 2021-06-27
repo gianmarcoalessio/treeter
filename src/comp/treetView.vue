@@ -25,19 +25,7 @@
         <h1 class="text-xl ml-3 font-bold">Treet</h1>
       </div>
       <div class="p-3 border-b-4">
-        <pre>{{ treet }}</pre>
-        <jgTreet
-          class="text-2xl"
-          :id="$route.params.id"
-          :src="treet.src"
-          :name="treet.name"
-          :username="treet.username"
-          :time="String(treet.time)"
-          :tweet="treet.tweet"
-          :comments="String(treet.comments)"
-          :retweets="String(treet.retweets)"
-          :likes="String(treet.likes)"
-        />
+        <jgTreet class="text-2xl" :id="$route.params.id" :treet="treet" />
       </div>
     </d-scrollmanager>
   </div>
@@ -69,7 +57,6 @@ export default {
     },
     gotomain() {
       this.$router.push("/treet/" + this.id);
-      // this.$router.push("/treet/", { id: this.id }); DOMANDA
     },
   },
   async created() {

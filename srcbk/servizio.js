@@ -94,7 +94,7 @@ router
             var query3 = db.prepare(`select count(user) as count from likes where liked=?`)
             // con querydefinitiva sostituisco i cicli for e ottengo gia solo i primi 20 in ordine cronologico
             var hasmore = false
-            var querydefinitiva = `select id as tid, date, content as tweet, isRetreet, author as uid from treets where author in (select following from followers where user = ?) or author = ? order by date desc limit ${page * MAXTWEET},${MAXTWEET + 1}`
+            var querydefinitiva = `select id as tid, date, content as tweet, isRetreet, author as uid from treets where author in (select following from followers where user = ?) or author = ? order by date desc, rowid desc limit ${page * MAXTWEET},${MAXTWEET + 1}`
             var treets = db.prepare(querydefinitiva).all(logged, logged)
             if (treets.length > MAXTWEET) {
                 hasmore = true;

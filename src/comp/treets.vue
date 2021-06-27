@@ -6,18 +6,7 @@
     :key="i"
     class="flex flex-col-reverse w-full p-4 border-b hover:bg-lighter"
   >
-    <!-- <pre>{{ treet }}</pre> -->
-    <jgTreet
-      :id="treet.tid"
-      :src="treet.src"
-      :name="treet.name"
-      :username="treet.username"
-      :time="String(treet.time)"
-      :tweet="treet.tweet"
-      :comments="String(treet.comments)"
-      :retweets="String(treet.retweets)"
-      :likes="String(treet.likes)"
-    />
+    <jgTreet :id="treet.tid" :treet="treet" />
   </div>
   <!-- <button v-if="hasmore" @click="load(page)" class="ml-44">more</button> -->
 </template>
@@ -31,6 +20,7 @@ export default {
       treets: [],
       page: 0,
       hasmore: false,
+      isloading: false,
     };
   },
   components: {
@@ -47,11 +37,19 @@ export default {
     //   this.hasmore = t.hasmore;
     //   this.page++;
     // },
+    async more() {
+      if (!this.isloading) {
+        this.isloading = true;
+        await this.load();
+        this.isloading = false;
+      }
+    },
     async load() {
       var t = await this.$fetch("servizio/jgFeedMore", {
         logged: this.logged.id,
         page: this.page,
       });
+      console.log("logged", this.page);
       if (this.page == 0) {
         this.treets = t.treets;
       } else {
@@ -68,14 +66,20 @@ export default {
     this.$globalon("logged", (id) => {
       this.logged.id = id;
       this.treets = [];
-      this.load(0);
+      this.page = 0;
+      this.load();
+    });
+    this.$globalon("newTreet", () => {
+      this.page = 0;
+      this.load();
     });
     this.$globalon("logout", () => {
       this.logged.id = "";
       this.treets = [];
     });
-    this.load(0);
-    this.$globalon("more", this.load);
+    this.page = 0;
+    this.load();
+    this.$globalon("more", this.more);
   },
   beforeUnmount() {
     this.$globaloff("logged");
